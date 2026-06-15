@@ -8,31 +8,31 @@ export const metadata: Metadata = {
   description: "Download the Lottmart Android B2B application. Access live bulk lots, escrow payouts, and track wholesale orders directly from your smartphone."
 };
 
-export default function Download() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Download App",
-        "item": "https://www.lottmart.com/download"
-      }
-    ]
-  };
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Download App",
+      "item": "https://www.lottmart.com/download"
+    }
+  ]
+};
 
+export default function Download() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
 
       {/* Main Showcase Grid */}

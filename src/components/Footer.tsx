@@ -1,22 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const QUICK_LINKS = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Features", href: "/features" },
+  { name: "How It Works", href: "/how-it-works" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Partner", href: "/partner" },
+  { name: "Contact", href: "/contact" },
+];
+
+const LEGAL_LINKS = [
+  { name: "Privacy Policy", href: "/privacy" },
+  { name: "Terms & Conditions", href: "/terms" },
+];
+
 export default function Footer() {
-  const quickLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Features", href: "/features" },
-    { name: "How It Works", href: "/how-it-works" },
-    { name: "FAQ", href: "/faq" },
-    { name: "Partner", href: "/partner" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const legalLinks = [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms & Conditions", href: "/terms" },
-  ];
-
   return (
     <footer className="bg-zinc-950 text-zinc-400 py-16 border-t border-zinc-900 mt-auto bg-[#09090b]">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -62,7 +62,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <h4 className="text-white text-sm font-bold uppercase tracking-wider">Quick Links</h4>
           <ul className="flex flex-col gap-2.5">
-            {quickLinks.map((link) => (
+            {QUICK_LINKS.map((link) => (
               <li key={link.name}>
                 <Link href={link.href} className="text-[0.95rem] hover:text-primary transition-all hover:pl-1">
                   {link.name}
@@ -75,7 +75,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <h4 className="text-white text-sm font-bold uppercase tracking-wider">Legal</h4>
           <ul className="flex flex-col gap-2.5">
-            {legalLinks.map((link) => (
+            {LEGAL_LINKS.map((link) => (
               <li key={link.name}>
                 <Link href={link.href} className="text-[0.95rem] hover:text-primary transition-all hover:pl-1">
                   {link.name}

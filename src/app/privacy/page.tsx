@@ -5,31 +5,31 @@ export const metadata: Metadata = {
   description: "Read Lottmart's Privacy Policy. Understand how we protect your business profile data, transaction logs, escrow security, and promoter referral mappings."
 };
 
-export default function Privacy() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Privacy Policy",
-        "item": "https://www.lottmart.com/privacy"
-      }
-    ]
-  };
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Privacy Policy",
+      "item": "https://www.lottmart.com/privacy"
+    }
+  ]
+};
 
+export default function Privacy() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
 
       {/* Page Header */}

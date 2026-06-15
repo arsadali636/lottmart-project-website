@@ -18,7 +18,7 @@ export default function PartnerForm() {
 
   const roleParam = searchParams.get("role");
   const targetRole = (roleParam && ["distributor", "retailer", "promoter", "partnership"].includes(roleParam)) ? roleParam : "";
-  const [prevRole, setPrevRole] = useState<string | null>(null);
+  const [prevRole, setPrevRole] = useState(targetRole);
 
   if (targetRole !== prevRole) {
     setPrevRole(targetRole);

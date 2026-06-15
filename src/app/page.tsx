@@ -1,228 +1,176 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HomeBenefits from "@/components/HomeBenefits";
+import FAQAccordion from "@/components/FAQAccordion";
+
+const SCHEMA_DATA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Lottmart",
+  "url": "https://www.lottmart.com/",
+  "logo": "https://www.lottmart.com/assets/logo.png",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-8126177819",
+      "contactType": "customer support",
+      "areaServed": "IN",
+      "availableLanguage": ["en", "hi"]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+91-8126044585",
+      "contactType": "partnerships support",
+      "areaServed": "IN",
+      "availableLanguage": ["en", "hi"]
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/lottmart",
+    "https://www.instagram.com/lottmart_product"
+  ]
+};
+
+const TRUST_METRICS = [
+  { name: "Verified Network", logo: "VERIFIED TRADE" },
+  { name: "Secure Escrow", logo: "ESCROW SAFE" },
+  { name: "Automated Routing", logo: "SMART ROUTING" },
+  { name: "Instant Settlements", logo: "QUICK PAY" },
+  { name: "KYC Compliance", logo: "KYC COMPLIANT" }
+];
+
+const STEPS = [
+  {
+    step: "01",
+    title: "Distributor Syndicates Lots",
+    desc: "Wholesalers define lot parameters, minimum thresholds, and prompt promoter commission rates inside the platform panel."
+  },
+  {
+    step: "02",
+    title: "Promoters Share Deals",
+    desc: "Coordinators push custom referral links to their networks of retail stores to drive immediate buying momentum."
+  },
+  {
+    step: "03",
+    title: "Retailers Join Buying Lots",
+    desc: "Local retailers syndicate orders to fill the lot requirements, locking bulk discounts and placing funds in escrow."
+  },
+  {
+    step: "04",
+    title: "Escrow and Safe Delivery",
+    desc: "Funds stay protected by Lottmart Escrow. Supply chain partners fulfill logistics, dispatching directly to the store."
+  },
+  {
+    step: "05",
+    title: "Verification & Settlement",
+    desc: "Retailer checks and confirms inventory count. Escrow clears, sending funds to distributors and commissions to promoters."
+  }
+];
+
+const FEATURES = [
+  {
+    title: "Escrow Payment Shield",
+    desc: "Retailer funds remain in safe secure escrow. Payouts clear only after shipping verification.",
+    icon: (
+      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    )
+  },
+  {
+    title: "Smart Promoter Routing",
+    desc: "Automated tracking links purchases to promoters with 100% wallet payout integrity.",
+    icon: (
+      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    )
+  },
+  {
+    title: "Live Lot Syndicate",
+    desc: "Real-time updates on active lot filling percentages inside the native Android mobile app.",
+    icon: (
+      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    )
+  },
+  {
+    title: "B2B Business KYC",
+    desc: "Comprehensive business screening verifies GST, trade credentials, and location validation.",
+    icon: (
+      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+    )
+  },
+  {
+    title: "Custom Lot Campaigner",
+    desc: "Distributors build and launch wholesale deal brackets, pricing steps, and lot milestones in 2 minutes.",
+    icon: (
+      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+    )
+  },
+  {
+    title: "Freight Coordination",
+    desc: "Consolidated freight networks automate dispatch, tracking, and regional delivery routing logs.",
+    icon: (
+      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+      </svg>
+    )
+  }
+];
+
+const TESTIMONIALS = [
+  {
+    quote: "Lottmart completely changed how I clear regional inventory batches. Using promoter campaigns, I sold through 5,000 units of home appliances in less than 24 hours. The escrow payout is extremely reliable.",
+    author: "Rajesh K. Mehta",
+    role: "Director of Supply, Mehta Electronics (Noida)",
+    avatar: "RM"
+  },
+  {
+    quote: "As a local grocery store owner, direct sourcing was impossible due to high MOQ constraints. Group buying on Lottmart allows me to buy directly from manufacturers, saving 25% on sourcing bills.",
+    author: "Sunita Deshmukh",
+    role: "Owner, Deshmukh Supermart (Indore)",
+    avatar: "SD"
+  },
+  {
+    quote: "Coordinating lots for local apparel sellers has become my main business. The promoter links route checkouts instantly, and I withdraw my commission earnings straight to my bank account with one tap.",
+    author: "Amit Sharma",
+    role: "Market Coordinator & Promoter (New Delhi)",
+    avatar: "AS"
+  }
+];
+
+const FAQ_ITEMS = [
+  {
+    question: "What is Lottmart and how does it benefit my business?",
+    answer: "Lottmart is a premium, mobile-first B2B marketplace platform connecting verified distributors, retailers, and promoters into a unified trade syndicate. Wholesalers clear stock instantly, retailers buy direct at collective volume discounts, and promoters earn margins for coordinating deals."
+  },
+  {
+    question: "How does the Lottmart Escrow Payment shield work?",
+    answer: "When a retailer buys into an active lot, the funds are deposited securely in Lottmart Escrow. The capital is safely held by the platform and only released to the distributor after the retailer confirms receiving the wholesale parcel in correct quantity and condition."
+  },
+  {
+    question: "How do promoters track checkouts and withdraw earnings?",
+    answer: "Promoters share trackable, system-generated deal links with their network of local shops. The platform's routing system matches checkouts directly to the promoter's Commission Wallet. Cleared balances can be withdrawn directly to verified bank accounts instantly."
+  },
+  {
+    question: "Do I need KYC verification to trade on Lottmart?",
+    answer: "Yes. Lottmart is an enterprise-grade platform. All participants must submit GST registration, trade licenses, or business profile credentials to pass our screening checks and enter the trading ecosystem."
+  }
+];
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"distributors" | "retailers" | "promoters">("distributors");
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Lottmart",
-    "url": "https://www.lottmart.com/",
-    "logo": "https://www.lottmart.com/assets/logo.png",
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "telephone": "+91-8126177819",
-        "contactType": "customer support",
-        "areaServed": "IN",
-        "availableLanguage": ["en", "hi"]
-      },
-      {
-        "@type": "ContactPoint",
-        "telephone": "+91-8126044585",
-        "contactType": "partnerships support",
-        "areaServed": "IN",
-        "availableLanguage": ["en", "hi"]
-      }
-    ],
-    "sameAs": [
-      "https://www.linkedin.com/company/lottmart",
-      "https://www.instagram.com/lottmart_product"
-    ]
-  };
-
-  const trustMetrics = [
-    { name: "Verified Network", logo: "VERIFIED TRADE" },
-    { name: "Secure Escrow", logo: "ESCROW SAFE" },
-    { name: "Automated Routing", logo: "SMART ROUTING" },
-    { name: "Instant Settlements", logo: "QUICK PAY" },
-    { name: "KYC Compliance", logo: "KYC COMPLIANT" }
-  ];
-
-  const benefitsData = {
-    distributors: {
-      title: "Unlock High-Velocity Stock Turnover",
-      subtitle: "For Wholesalers, Importers, and Manufacturers",
-      description: "Direct-to-retail distribution channels without the overhead of physical sales agents. Clear massive volume lots in record time by tapping into our decentralized promoter networks.",
-      bullets: [
-        "Accelerate inventory velocity: Offload entire lot campaigns within hours.",
-        "Zero bad debt risks: Retailer funds are fully deposited in escrow before transport.",
-        "Brand protection: Sell bulk batches discreetly without disrupting retail price tags.",
-        "Automated commission tracking: Promoters drive sales while our ledger maps payouts."
-      ],
-      link: "/partner?role=distributor",
-      btnText: "Partner as Distributor",
-      metric: "3x Faster",
-      metricLabel: "Stock Turnover Rate"
-    },
-    retailers: {
-      title: "Source Direct. Maximize Your Margin.",
-      subtitle: "For Local Shops, Supermarkets, and E-commerce Stores",
-      description: "Join collective buying pools to secure tier-1 manufacturer discount brackets usually reserved for corporate conglomerates. Lower your cost-per-item and scale profitability.",
-      bullets: [
-        "Factory-direct pricing: Bypass regional brokers and broker fees completely.",
-        "Escrow-protected capital: Payment is released only after you verify parcel contents.",
-        "Flexible lot syndication: Buy parts of a large lot without heavy MOQ requirements.",
-        "Real-time logistics: Complete tracking from the distributor's dispatch dock to your shop."
-      ],
-      link: "/partner?role=retailer",
-      btnText: "Join as Retailer",
-      metric: "24% Saved",
-      metricLabel: "Average Sourcing Cost"
-    },
-    promoters: {
-      title: "Monetize Your Network. Earn Uncapped Margins.",
-      subtitle: "For Social Commerce Agents and Freelance Coordinators",
-      description: "Find high-demand wholesale deals, share unique trackable syndicate links with retailers in your network, and coordinate lot checkouts. Earn commissions on every single unit filled.",
-      bullets: [
-        "Bulletproof referral attribution: Our smart routing engine links checkouts directly to you.",
-        "Single-tap bank withdrawal: Withdraw cleared commissions instantly from the app wallet.",
-        "Ready-made marketing assets: Professional banners and product copy provided in-app.",
-        "Flexible workspace: Build a recurring B2B coordinator income from anywhere in India."
-      ],
-      link: "/partner?role=promoter",
-      btnText: "Earn as Promoter",
-      metric: "Rs. 45K+",
-      metricLabel: "Avg. Monthly Income"
-    }
-  };
-
-  const steps = [
-    {
-      step: "01",
-      title: "Distributor Syndicates Lots",
-      desc: "Wholesalers define lot parameters, minimum thresholds, and prompt promoter commission rates inside the platform panel."
-    },
-    {
-      step: "02",
-      title: "Promoters Share Deals",
-      desc: "Coordinators push custom referral links to their networks of retail stores to drive immediate buying momentum."
-    },
-    {
-      step: "03",
-      title: "Retailers Join Buying Lots",
-      desc: "Local retailers syndicate orders to fill the lot requirements, locking bulk discounts and placing funds in escrow."
-    },
-    {
-      step: "04",
-      title: "Escrow and Safe Delivery",
-      desc: "Funds stay protected by Lottmart Escrow. Supply chain partners fulfill logistics, dispatching directly to the store."
-    },
-    {
-      step: "05",
-      title: "Verification & Settlement",
-      desc: "Retailer checks and confirms inventory count. Escrow clears, sending funds to distributors and commissions to promoters."
-    }
-  ];
-
-  const features = [
-    {
-      title: "Escrow Payment Shield",
-      desc: "Retailer funds remain in safe secure escrow. Payouts clear only after shipping verification.",
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      )
-    },
-    {
-      title: "Smart Promoter Routing",
-      desc: "Automated tracking links purchases to promoters with 100% wallet payout integrity.",
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-        </svg>
-      )
-    },
-    {
-      title: "Live Lot Syndicate",
-      desc: "Real-time updates on active lot filling percentages inside the native Android mobile app.",
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-    {
-      title: "B2B Business KYC",
-      desc: "Comprehensive business screening verifies GST, trade credentials, and location validation.",
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-      )
-    },
-    {
-      title: "Custom Lot Campaigner",
-      desc: "Distributors build and launch wholesale deal brackets, pricing steps, and lot milestones in 2 minutes.",
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
-      )
-    },
-    {
-      title: "Freight Coordination",
-      desc: "Consolidated freight networks automate dispatch, tracking, and regional delivery routing logs.",
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-        </svg>
-      )
-    }
-  ];
-
-  const testimonials = [
-    {
-      quote: "Lottmart completely changed how I clear regional inventory batches. Using promoter campaigns, I sold through 5,000 units of home appliances in less than 24 hours. The escrow payout is extremely reliable.",
-      author: "Rajesh K. Mehta",
-      role: "Director of Supply, Mehta Electronics (Noida)",
-      avatar: "RM"
-    },
-    {
-      quote: "As a local grocery store owner, direct sourcing was impossible due to high MOQ constraints. Group buying on Lottmart allows me to buy directly from manufacturers, saving 25% on sourcing bills.",
-      author: "Sunita Deshmukh",
-      role: "Owner, Deshmukh Supermart (Indore)",
-      avatar: "SD"
-    },
-    {
-      quote: "Coordinating lots for local apparel sellers has become my main business. The promoter links route checkouts instantly, and I withdraw my commission earnings straight to my bank account with one tap.",
-      author: "Amit Sharma",
-      role: "Market Coordinator & Promoter (New Delhi)",
-      avatar: "AS"
-    }
-  ];
-
-  const faqItems = [
-    {
-      question: "What is Lottmart and how does it benefit my business?",
-      answer: "Lottmart is a premium, mobile-first B2B marketplace platform connecting verified distributors, retailers, and promoters into a unified trade syndicate. Wholesalers clear stock instantly, retailers buy direct at collective volume discounts, and promoters earn margins for coordinating deals."
-    },
-    {
-      question: "How does the Lottmart Escrow Payment shield work?",
-      answer: "When a retailer buys into an active lot, the funds are deposited securely in Lottmart Escrow. The capital is safely held by the platform and only released to the distributor after the retailer confirms receiving the wholesale parcel in correct quantity and condition."
-    },
-    {
-      question: "How do promoters track checkouts and withdraw earnings?",
-      answer: "Promoters share trackable, system-generated deal links with their network of local shops. The platform's routing system matches checkouts directly to the promoter's Commission Wallet. Cleared balances can be withdrawn directly to verified bank accounts instantly."
-    },
-    {
-      question: "Do I need KYC verification to trade on Lottmart?",
-      answer: "Yes. Lottmart is an enterprise-grade platform. All participants must submit GST registration, trade licenses, or business profile credentials to pass our screening checks and enter the trading ecosystem."
-    }
-  ];
-
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA_DATA) }}
       />
 
       {/* Hero Section */}
@@ -321,7 +269,7 @@ export default function Home() {
               ENTERPRISE STANDARDS
             </span>
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-              {trustMetrics.map((metric, i) => (
+              {TRUST_METRICS.map((metric, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -346,7 +294,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 relative">
-            {steps.map((step, i) => (
+            {STEPS.map((step, i) => (
               <div key={i} className="card-glass bg-white p-8 rounded-2xl border border-zinc-250/30 flex flex-col justify-between">
                 <div>
                   <span className="font-heading font-black text-5xl text-primary/10 block mb-6">{step.step}</span>
@@ -369,90 +317,7 @@ export default function Home() {
 
       {/* Benefits tab section */}
       <section className="bg-white py-24 border-b border-zinc-200/40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary font-bold text-xs uppercase tracking-widest mb-3 block font-heading">TAILORED B2B BLUEPRINTS</span>
-            <h2 className="font-heading text-4xl md:text-5xl font-black text-text-primary tracking-tight mb-4">Ecosystem Playbooks</h2>
-            <p className="text-text-secondary text-lg">
-              Explore how Lottmart provides massive margin and efficiency benefits tailored for your commercial role.
-            </p>
-          </div>
-
-          {/* Tabs header */}
-          <div className="flex justify-center border-b border-zinc-200 max-w-md mx-auto mb-16">
-            <button
-              onClick={() => setActiveTab("distributors")}
-              className={`flex-1 text-center font-heading font-bold text-sm pb-4 transition-all border-b-2 cursor-pointer ${
-                activeTab === "distributors" ? "border-primary text-primary" : "border-transparent text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              Distributors
-            </button>
-            <button
-              onClick={() => setActiveTab("retailers")}
-              className={`flex-1 text-center font-heading font-bold text-sm pb-4 transition-all border-b-2 cursor-pointer ${
-                activeTab === "retailers" ? "border-primary text-primary" : "border-transparent text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              Retailers
-            </button>
-            <button
-              onClick={() => setActiveTab("promoters")}
-              className={`flex-1 text-center font-heading font-bold text-sm pb-4 transition-all border-b-2 cursor-pointer ${
-                activeTab === "promoters" ? "border-primary text-primary" : "border-transparent text-text-secondary hover:text-text-primary"
-              }`}
-            >
-              Promoters
-            </button>
-          </div>
-
-          {/* Active Tab Panel */}
-          <div className="card-glass bg-zinc-50/50 p-8 md:p-12 rounded-3xl border border-zinc-200/40 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 flex flex-col items-start">
-              <span className="text-xs font-black uppercase tracking-wider text-primary mb-2">
-                {benefitsData[activeTab].subtitle}
-              </span>
-              <h3 className="font-heading text-3xl font-black text-text-primary mb-4 leading-tight">
-                {benefitsData[activeTab].title}
-              </h3>
-              <p className="text-text-secondary leading-relaxed mb-8 text-[0.95rem]">
-                {benefitsData[activeTab].description}
-              </p>
-
-              <ul className="flex flex-col gap-4 mb-8">
-                {benefitsData[activeTab].bullets.map((bullet, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 text-[10px] mt-0.5 font-black">
-                      ✓
-                    </span>
-                    <span className="text-sm font-semibold text-text-primary">{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href={benefitsData[activeTab].link}
-                className="bg-primary hover:bg-primary-hover text-white font-extrabold text-sm px-8 py-4 rounded-xl shadow-xs transition-all duration-300"
-              >
-                {benefitsData[activeTab].btnText}
-              </Link>
-            </div>
-
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <div className="bg-white border border-zinc-200/60 p-8 rounded-2xl shadow-sm text-center max-w-[320px] w-full flex flex-col justify-center items-center h-[260px]">
-                <span className="font-heading text-5xl font-black text-gradient mb-3 block">
-                  {benefitsData[activeTab].metric}
-                </span>
-                <span className="text-sm font-bold text-text-primary">
-                  {benefitsData[activeTab].metricLabel}
-                </span>
-                <span className="text-xs text-text-muted mt-2 leading-normal">
-                  Verified platform execution audit metric across active categories.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HomeBenefits />
       </section>
 
       {/* Features Grid Section */}
@@ -467,7 +332,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, i) => (
+            {FEATURES.map((feature, i) => (
               <div key={i} className="card-glass bg-white p-8 rounded-2xl border border-zinc-200/20 shadow-xs flex flex-col items-start">
                 <div className="w-12 h-12 rounded-xl bg-primary/15 text-primary flex items-center justify-center mb-6">
                   {feature.icon}
@@ -548,7 +413,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {testimonials.map((testi, i) => (
+            {TESTIMONIALS.map((testi, i) => (
               <div key={i} className="card-glass bg-white p-8 rounded-2xl border border-zinc-200/20 shadow-xs flex flex-col justify-between">
                 <p className="text-text-secondary italic text-sm leading-relaxed mb-8">
                   &ldquo;{testi.quote}&rdquo;
@@ -579,30 +444,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4 mb-12">
-            {faqItems.map((item, idx) => {
-              const isOpen = activeFaq === idx;
-              return (
-                <div key={idx} className="border border-zinc-200/60 rounded-xl overflow-hidden bg-zinc-50/50 transition-all duration-300">
-                  <button
-                    onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full px-6 py-4.5 text-left flex justify-between items-center cursor-pointer outline-none"
-                  >
-                    <span className="font-heading font-extrabold text-base text-text-primary pr-4">
-                      {item.question}
-                    </span>
-                    <span className={`w-5 h-5 rounded-full bg-zinc-100 flex items-center justify-center text-primary text-xs shrink-0 transition-transform ${isOpen ? "rotate-180 bg-primary text-white" : ""}`}>
-                      ▼
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div className="px-6 pb-5 text-text-secondary text-xs leading-relaxed border-t border-zinc-200/40 pt-3 bg-white">
-                      {item.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          <div className="mb-12">
+            <FAQAccordion items={FAQ_ITEMS} />
           </div>
 
           <div className="text-center">

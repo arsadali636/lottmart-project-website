@@ -7,31 +7,31 @@ export const metadata: Metadata = {
   description: "Onboard as a Lottmart distributor, retailer, or promoter. Complete our partner query form to secure a callback and live platform demo."
 };
 
-export default function Partner() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Become A Partner",
-        "item": "https://www.lottmart.com/partner"
-      }
-    ]
-  };
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Become A Partner",
+      "item": "https://www.lottmart.com/partner"
+    }
+  ]
+};
 
+export default function Partner() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
 
       {/* Page Header */}

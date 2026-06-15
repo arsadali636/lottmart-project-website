@@ -5,59 +5,59 @@ export const metadata: Metadata = {
   description: "Learn how Lottmart connects B2B stakeholders in 5 simple steps: download the app, select your trade role, access live bulk deals, and trade at scale."
 };
 
-export default function HowItWorks() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "How It Works",
-        "item": "https://www.lottmart.com/how-it-works"
-      }
-    ]
-  };
-
-  const stepsList = [
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
     {
-      step: 1,
-      title: "Download App",
-      desc: "Install the Lottmart B2B application on your Android device. Complete quick profile registration and secure SMS code authentication."
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
     },
     {
-      step: 2,
-      title: "Confirm KYC Verification",
-      desc: "Upload business identification (GST number, trade license, or active company proof) to verify your credentials for wholesale access."
-    },
-    {
-      step: 3,
-      title: "Access Live B2B Deals",
-      desc: "Browse our dynamic real-time lot listing brackets. Gain immediate transparency on volume milestones and quantity pricing charts."
-    },
-    {
-      step: 4,
-      title: "Coordinate or Transact",
-      desc: "Launch wholesale lot syndicates if you are a distributor, buy portions of a lot via escrow if you are a retailer, or share links if you are a promoter."
-    },
-    {
-      step: 5,
-      title: "Settle and Release Escrow",
-      desc: "Watch volume targets fill up. Parcels are delivered directly. Retailers inspect quality, triggering instant payout payouts to banking nodes."
+      "@type": "ListItem",
+      "position": 2,
+      "name": "How It Works",
+      "item": "https://www.lottmart.com/how-it-works"
     }
-  ];
+  ]
+};
 
+const STEPS_LIST = [
+  {
+    step: 1,
+    title: "Download App",
+    desc: "Install the Lottmart B2B application on your Android device. Complete quick profile registration and secure SMS code authentication."
+  },
+  {
+    step: 2,
+    title: "Confirm KYC Verification",
+    desc: "Upload business identification (GST number, trade license, or active company proof) to verify your credentials for wholesale access."
+  },
+  {
+    step: 3,
+    title: "Access Live B2B Deals",
+    desc: "Browse our dynamic real-time lot listing brackets. Gain immediate transparency on volume milestones and quantity pricing charts."
+  },
+  {
+    step: 4,
+    title: "Coordinate or Transact",
+    desc: "Launch wholesale lot syndicates if you are a distributor, buy portions of a lot via escrow if you are a retailer, or share links if you are a promoter."
+  },
+  {
+    step: 5,
+    title: "Settle and Release Escrow",
+    desc: "Watch volume targets fill up. Parcels are delivered directly. Retailers inspect quality, triggering instant payout payouts to banking nodes."
+  }
+];
+
+export default function HowItWorks() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
 
       {/* Page Header */}
@@ -80,7 +80,7 @@ export default function HowItWorks() {
       <section className="bg-white py-24 border-b border-zinc-200/40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="relative max-w-3xl mx-auto border-l-2 border-primary/20 pl-8 ml-4 sm:ml-auto flex flex-col gap-12">
-            {stepsList.map((stepItem) => (
+            {STEPS_LIST.map((stepItem) => (
               <div key={stepItem.step} className="relative">
                 <span className="absolute -left-[45px] top-1 w-8 h-8 rounded-full bg-primary text-white font-extrabold text-xs flex items-center justify-center shadow-xs">
                   {stepItem.step}

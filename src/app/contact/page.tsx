@@ -6,58 +6,58 @@ export const metadata: Metadata = {
   description: "Get in touch with Lottmart. Access support phone lines, send partnership queries, or submit an enquiry to our operations centers in India."
 };
 
-export default function Contact() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Contact Us",
-        "item": "https://www.lottmart.com/contact"
-      }
-    ]
-  };
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Lottmart Platform Office",
-    "image": "https://www.lottmart.com/assets/logo.png",
-    "telephone": "+91-8126177819",
-    "email": "support@lottmart.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "B2B Trade Center, Sector 62",
-      "addressLocality": "Noida",
-      "addressRegion": "Uttar Pradesh",
-      "postalCode": "201301",
-      "addressCountry": "IN"
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
     },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "opens": "09:00",
-      "closes": "20:00"
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contact Us",
+      "item": "https://www.lottmart.com/contact"
     }
-  };
+  ]
+};
 
+const LOCAL_BUSINESS_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Lottmart Platform Office",
+  "image": "https://www.lottmart.com/assets/logo.png",
+  "telephone": "+91-8126177819",
+  "email": "support@lottmart.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "B2B Trade Center, Sector 62",
+    "addressLocality": "Noida",
+    "addressRegion": "Uttar Pradesh",
+    "postalCode": "201301",
+    "addressCountry": "IN"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "09:00",
+    "closes": "20:00"
+  }
+};
+
+export default function Contact() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(LOCAL_BUSINESS_SCHEMA) }}
       />
 
       {/* Page Header */}

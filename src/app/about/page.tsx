@@ -5,51 +5,52 @@ export const metadata: Metadata = {
   description: "Learn about Lottmart's mission to unify fragmented wholesale markets, build direct connections, and establish India's leading bulk-buying trading network."
 };
 
-export default function About() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "About Us",
-        "item": "https://www.lottmart.com/about"
-      }
-    ]
-  };
-
-  const timelinePhases = [
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
     {
-      phase: "Phase 1: Foundation (Q2 2024)",
-      desc: "Lottmart was conceived by commerce veterans who recognized deep systemic fragmentations in regional product distribution. We mapped the core role blueprints for distributors, retailers, and promoters."
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
     },
     {
-      phase: "Phase 2: Alpha Application (Q4 2024)",
-      desc: "Built and deployed the alpha Android application to a closed group of 100 distributors and 500 retailers in selected pilot hubs. Validated our escrow safety mechanisms."
-    },
-    {
-      phase: "Phase 3: Promoter Integration (Q2 2025)",
-      desc: "Introduced the Commission Wallet and Promoter referral engine, allowing social commerce coordinators to actively liquidate lots for distributors, creating instant earning channels."
-    },
-    {
-      phase: "Phase 4: Multi-City Expansion (2026)",
-      desc: "Currently scaling across 100+ cities in India, onboarding thousands of verified distributors and retailers, moving high-volume trade lots daily."
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About Us",
+      "item": "https://www.lottmart.com/about"
     }
-  ];
+  ]
+};
 
+const TIMELINE_PHASES = [
+  {
+    phase: "Phase 1: Foundation (Q2 2024)",
+    desc: "Lottmart was conceived by commerce veterans who recognized deep systemic fragmentations in regional product distribution. We mapped the core role blueprints for distributors, retailers, and promoters."
+  },
+  {
+    phase: "Phase 2: Alpha Application (Q4 2024)",
+    desc: "Built and deployed the alpha Android application to a closed group of 100 distributors and 500 retailers in selected pilot hubs. Validated our escrow safety mechanisms."
+  },
+  {
+    phase: "Phase 3: Promoter Integration (Q2 2025)",
+    desc: "Introduced the Commission Wallet and Promoter referral engine, allowing social commerce coordinators to actively liquidate lots for distributors, creating instant earning channels."
+  },
+  {
+    phase: "Phase 4: Multi-City Expansion (2026)",
+    desc: "Currently scaling across 100+ cities in India, onboarding thousands of verified distributors and retailers, moving high-volume trade lots daily."
+  }
+];
+
+export default function About() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
+
 
       {/* Page Header */}
       <section className="pt-32 pb-16 bg-zinc-50 border-b border-zinc-200/40 bg-grid-pattern relative">
@@ -144,7 +145,7 @@ export default function About() {
           </div>
 
           <div className="relative max-w-3xl mx-auto border-l-2 border-primary/20 pl-8 ml-4 sm:ml-auto">
-            {timelinePhases.map((phase, i) => (
+            {TIMELINE_PHASES.map((phase, i) => (
               <div key={i} className="mb-12 relative">
                 <span className="absolute -left-[41px] top-1.5 w-6 h-6 rounded-full bg-primary border-4 border-white shadow-xs"></span>
                 <h4 className="font-heading font-extrabold text-lg text-primary mb-2">{phase.phase}</h4>

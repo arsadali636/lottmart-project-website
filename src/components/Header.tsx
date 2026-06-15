@@ -5,33 +5,36 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
+const NAV_LINKS = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Features", href: "/features" },
+  { name: "How It Works", href: "/how-it-works" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Partner", href: "/partner" },
+  { name: "Contact", href: "/contact" },
+];
+
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Run initially
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Features", href: "/features" },
-    { name: "How It Works", href: "/how-it-works" },
-    { name: "FAQ", href: "/faq" },
-    { name: "Partner", href: "/partner" },
-    { name: "Contact", href: "/contact" },
-  ];
 
   const handleLoginAlert = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,7 +64,7 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const isActive =
                 pathname === link.href ||
                 (link.href !== "/" && pathname?.startsWith(link.href));
@@ -140,7 +143,7 @@ export default function Header() {
         } lg:hidden`}
       >
         <div className="flex flex-col gap-6 mb-10">
-          {navLinks.map((link) => {
+          {NAV_LINKS.map((link) => {
             const isActive =
               pathname === link.href ||
               (link.href !== "/" && pathname?.startsWith(link.href));

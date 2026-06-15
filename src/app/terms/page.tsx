@@ -5,31 +5,31 @@ export const metadata: Metadata = {
   description: "Review the Lottmart Terms & Conditions. Read legal guidelines on lot listings, escrow clearing contracts, promoter wallets, and KYC obligations in India."
 };
 
-export default function Terms() {
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.lottmart.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Terms & Conditions",
-        "item": "https://www.lottmart.com/terms"
-      }
-    ]
-  };
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.lottmart.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Terms & Conditions",
+      "item": "https://www.lottmart.com/terms"
+    }
+  ]
+};
 
+export default function Terms() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
 
       {/* Page Header */}
