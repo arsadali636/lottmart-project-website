@@ -106,7 +106,7 @@ export default function Contact() {
                     <a href="tel:9528353168" className="font-heading font-extrabold text-base text-text-primary block hover:text-primary transition-colors">
                       95283 53168
                     </a>
-                    <a href="tel:7808747054" className="font-heading font-extrabold text-base text-text-primary block hover:text-primary transition-colors">
+                    <a href="tel:7808774054" className="font-heading font-extrabold text-base text-text-primary block hover:text-primary transition-colors">
                       78087 74054
                     </a>
                   </div>
