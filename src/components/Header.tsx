@@ -51,13 +51,18 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <Link href="/" className="flex items-center transition-transform duration-300 hover:scale-[1.01]">
+          <Link
+            href="/"
+            className={`flex items-center transition-all duration-300 hover:scale-[1.01] ${
+              isOpen ? "opacity-20 pointer-events-none" : "opacity-100"
+            }`}
+          >
             <Image
               src="/assets/logo.png"
               alt="Lottmart B2B Marketplace"
               width={350}
               height={350}
-              className="h-56 w-auto object-contain mt-[-48px] mb-[-104px]"
+              className="h-28 sm:h-36 lg:h-56 w-auto object-contain mt-[-24px] mb-[-50px] sm:mt-[-31px] sm:mb-[-67px] lg:mt-[-48px] lg:mb-[-104px]"
               priority
             />
           </Link>

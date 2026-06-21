@@ -27,7 +27,7 @@ export default function Footer() {
               alt="Lottmart B2B Marketplace"
               width={400}
               height={400}
-              className="h-64 w-auto object-contain -my-22"
+              className="h-36 md:h-48 lg:h-64 w-auto object-contain mt-[-24px] mb-[-50px] md:mt-[-36px] md:mb-[-78px] lg:mt-[-50px] lg:mb-[-100px]"
             />
           </Link>
           <p className="text-[0.95rem] leading-relaxed">
