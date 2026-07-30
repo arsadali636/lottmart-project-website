@@ -8,7 +8,7 @@ const SCHEMA_DATA = {
   "@type": "Organization",
   "name": "Lottmart",
   "url": "https://www.lottmart.com/",
-  "logo": "https://www.lottmart.com/assets/logo.png",
+  "logo": "https://www.lottmart.com/assets/logo-square.jpg",
   "contactPoint": [
     {
       "@type": "ContactPoint",

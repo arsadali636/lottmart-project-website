@@ -29,7 +29,7 @@ const LOCAL_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Lottmart Platform Office",
-  "image": "https://www.lottmart.com/assets/logo.png",
+  "image": "https://www.lottmart.com/assets/logo-square.jpg",
   "telephone": "+91-8126177819",
   "email": "support@lottmart.com",
   "address": {

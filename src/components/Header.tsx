@@ -53,18 +53,28 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <Link
             href="/"
-            className={`flex items-center transition-all duration-300 hover:scale-[1.01] ${
+            className={`flex items-center gap-2 sm:gap-3 transition-all duration-300 hover:scale-[1.01] ${
               isOpen ? "opacity-20 pointer-events-none" : "opacity-100"
             }`}
           >
             <Image
-              src="/assets/logo.png"
-              alt="Lottmart B2B Marketplace"
-              width={350}
-              height={350}
-              className="h-28 sm:h-36 lg:h-56 w-auto object-contain mt-[-24px] mb-[-50px] sm:mt-[-31px] sm:mb-[-67px] lg:mt-[-48px] lg:mb-[-104px]"
+              src="/assets/logo-square.jpg"
+              alt="Lottmart B2B Logo"
+              width={80}
+              height={80}
+              className="h-12 sm:h-14 lg:h-16 w-auto object-contain rounded-xl shadow-sm"
               priority
             />
+            <div className="flex flex-col items-start justify-center pt-0.5">
+              <span className="text-[1.35rem] sm:text-[1.75rem] lg:text-[2rem] font-black tracking-tighter text-[#0051ff] leading-none mb-1.5">
+                LOTTMART
+              </span>
+              <div className="bg-gradient-to-r from-[#011453] to-[#0047df] rounded-full px-2.5 sm:px-3.5 py-[2px] shadow-sm">
+                <span className="text-white text-[0.55rem] sm:text-[0.65rem] lg:text-[0.7rem] font-bold tracking-[0.03em] block leading-tight">
+                  Trade at Scale. Earn More.
+                </span>
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Nav */}

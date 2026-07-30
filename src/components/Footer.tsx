@@ -21,14 +21,24 @@ export default function Footer() {
     <footer className="bg-zinc-950 text-zinc-400 py-16 border-t border-zinc-900 mt-auto bg-[#09090b]">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div className="flex flex-col gap-5">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center gap-3 mb-2 transition-transform hover:scale-[1.02] duration-300 w-fit">
             <Image
-              src="/assets/logo.png"
-              alt="Lottmart B2B Marketplace"
-              width={400}
-              height={400}
-              className="h-36 md:h-48 lg:h-64 w-auto object-contain mt-[-24px] mb-[-50px] md:mt-[-36px] md:mb-[-78px] lg:mt-[-50px] lg:mb-[-100px]"
+              src="/assets/logo-square.jpg"
+              alt="Lottmart B2B Logo"
+              width={100}
+              height={100}
+              className="h-16 lg:h-20 w-auto object-contain rounded-xl shadow-sm"
             />
+            <div className="flex flex-col items-start justify-center pt-1">
+              <span className="text-[1.75rem] lg:text-[2.25rem] font-black tracking-tighter text-[#0051ff] leading-none mb-1.5">
+                LOTTMART
+              </span>
+              <div className="bg-gradient-to-r from-[#011453] to-[#0047df] rounded-full px-3 sm:px-4 py-[2px] shadow-sm">
+                <span className="text-white text-[0.65rem] lg:text-[0.75rem] font-bold tracking-[0.03em] block leading-tight">
+                  Trade at Scale. Earn More.
+                </span>
+              </div>
+            </div>
           </Link>
           <p className="text-[0.95rem] leading-relaxed">
             Trade at Scale. Earn More. Connecting distributors, retailers, and promoters into one large bulk-commerce ecosystem.
