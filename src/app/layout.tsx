@@ -54,6 +54,14 @@ export const metadata: Metadata = {
     title: "Lottmart | B2B Marketplace Platform - Trade at Scale. Earn More.",
     description: "Lottmart is a premium B2B marketplace platform connecting distributors, retailers, and promoters in India. Trade at scale, reduce inventory costs, and earn commissions.",
     images: ["/assets/hero-illustration.png"]
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=3' },
+      { url: '/icon.png?v=3', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico?v=3',
+    apple: '/apple-icon.png?v=3',
   }
 };
 
